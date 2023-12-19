@@ -1,0 +1,92 @@
+<!-- PAGE 1 -->
+<!-- This page provides the content for the monthly covid statistics from 2021 -->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Covid Statistics</title>
+        <style>
+            .flex-container {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .flex-container > div {
+                margin: 10px;
+            }
+            .image-container, .table-container {
+                flex-basis: 50%; /* Adjust this value as needed */
+            }
+    
+            .button {
+                display: inline-block;
+                padding: 10px 20px;
+                margin: 10px;
+                background-color: #4CAF50;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                text-decoration: none;
+            }
+            .button:hover {
+                background-color: #45a049;
+            }
+        </style>
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    </head>
+<body>
+
+<div class="container mt-5">
+
+    <h1 style="text-align: center; margin-bottom: 1cm;"> Covid statistics in Dublin, Cork, Galway and Limerick in 2021 </h1>    
+
+    <h2> Dublin </h3>
+    <div class="flex-container">
+        <div class="image-container">
+            <img src="plots/dublin_plot.png" alt="Dublin Covid Statistics Plot" width="100%" height="auto">
+        </div>
+        <div class="table-container">
+            <h4> Dublin Covid Annual Statistics for 2021 </h4>
+            {{ table1|safe }} <!-- Link to table from Flask app -->
+        </div>
+    </div>
+    
+    <h2> Cork </h3>
+    <div class="flex-container">
+        <div class="image-container">
+            <img src="plots/cork_plot.png" alt="Cork Covid Statistics Plot" width="100%" height="auto">
+        </div>
+        <div class="table-container">
+            <h4> Cork Covid Annual Statistics for 2021 </h4>
+            {{ table2|safe }} <!-- Link to table from Flask app -->
+        </div>
+    </div>
+    
+    <h2> Galway </h3>
+    <div class="flex-container">
+        <div class="image-container">            
+            <img src="plots/galway_plot.png" alt="Galway Covid Statistics Plot" width="100%" height="auto">
+        </div>
+        <div class="table-container">
+            <h4> Galway Covid Annual Statistics for 2021 </h4>
+            {{ table3|safe }} <!-- Link to table from Flask app -->
+        </div>
+    </div>
+
+    <h2> Limerick </h3>
+    <div class="flex-container">
+        <div class="image-container">            
+            <img src="plots/limerick_plot.png" alt="Limerick Covid Statistics Plot" width="100%" height="auto">
+        </div>
+        <div class="table-container">
+            <h4> Limerick Covid Annual Statistics for 2021 </h4>
+            {{ table4|safe }} <!-- Link to table from Flask app -->
+        </div>
+    </div>
+
+    <!-- Back menu button -->
+    <a href="/index" class="button">Back to Main Page</a>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!-- LOGIN PAGE-->
+<!-- This page requests authorization before moving to index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .login-container {
+            width: 300px;
+            margin: 0 auto;
+        }
+        .header-container {
+            text-align: center;
+            margin-bottom: 1cm;
+            margin-top: 2.5cm;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header-container">
+            <h1>Welcome to COVID Statistics</h1>
+        </div>
+        <!-- LOGIN CONTAINER -->
+        <div class="login-container">
+            <h2 class="text-center">Login</h2>
+            <!-- Process to link the login page with the flask app-->
+            <form action="/process_login" method="post" class="mt-4">
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" class="form-control" id="username" name="username">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" class="form-control" id="password" name="password">
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+<img src="/plots/covidlogin.jpg" alt="Covid image login" class="d-block mx-auto" style="margin-top: 1cm; width: 20%; height: auto;">
+
+</body>
+</html>
+
+

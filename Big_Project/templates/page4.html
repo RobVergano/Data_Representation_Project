@@ -1,0 +1,168 @@
+<!-- PAGE 4 -->
+<!-- This page provides the form to add/update/delete data from the covid_rate table from the SQL database -->
+<!-- Same method as page 3 -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Insert/Update/Delete Covid Rates Data</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .container {
+            margin-top: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Form for Adding Covid Data -->
+<div class="container">
+    <h1 class="text-center">Insert Covid Rates Data</h1>
+    <form id="covidRatesForm">
+        <div class="form-group">
+            <label for="city">City:</label>
+            <input type="text" class="form-control" id="city" name="city" placeholder="Enter city" required>
+        </div>
+        <div class="form-group">
+            <label for="date">Date:</label>
+            <input type="date" class="form-control" id="date" name="date" required>
+        </div>
+        <div class="form-group">
+            <label for="casesPer100k">Cases per 100k:</label>
+            <input type="number" class="form-control" id="casesPer100k" name="casesPer100k" placeholder="Enter cases per 100k" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <div id="covidRatesResultMessage" class="mt-3"></div>
+</div>
+
+<!-- Form for updating Covid Data -->
+<div class="container">
+    <h1 class="text-center">Update Covid Rates Data</h1>
+    <form id="covidRatesUpdateForm">
+        <div class="form-group">
+            <label for="recordId">Record ID:</label>
+            <input type="number" class="form-control" id="recordId" name="recordId" placeholder="Enter record ID" required>
+        </div>
+        <div class="form-group">
+            <label for="updateCity">City:</label>
+            <input type="text" class="form-control" id="updateCity" name="updateCity" placeholder="Enter city" required>
+        </div>
+        <div class="form-group">
+            <label for="updateDate">Date:</label>
+            <input type="date" class="form-control" id="updateDate" name="updateDate" required>
+        </div>
+        <div class="form-group">
+            <label for="updateCasesPer100k">Cases per 100k:</label>
+            <input type="number" class="form-control" id="updateCasesPer100k" name="updateCasesPer100k" placeholder="Enter cases per 100k" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Update Data</button>
+    </form>
+    <div id="covidRatesUpdateResultMessage" class="mt-3"></div>
+</div>
+
+<!-- Form for Deleting Covid Data -->
+<div class="container"> 
+    <h1 class="text-center">Delete Covid Rates Data</h1>
+    <form id="deleteCovidRatesForm">
+        <div class="form-group">
+            <label for="deleteRecordId">Record ID:</label>
+            <input type="number" class="form-control" id="deleteRecordId" name="deleteRecordId" placeholder="Enter record ID" required>
+        </div>
+        <button type="submit" class="btn btn-danger">Delete Data</button>
+    </form>
+    <div id="covidRatesDeleteResultMessage" class="mt-3"></div>
+</div>
+
+<!-- Back to main menu button -->
+<div class="container">
+    <div class="form-group">
+        <a href="/index" class="button">Back to Main Page</a>
+    </div>  
+</div>
+
+
+<script>
+    // AJAX for Adding Data
+    document.getElementById('covidRatesForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        var data = {
+            city: document.getElementById('city').value,
+            date: document.getElementById('date').value,
+            casesPer100k: document.getElementById('casesPer100k').value
+        };
+
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById('covidRatesResultMessage').innerHTML = 'Data added successfully';
+            } else if (this.readyState == 4) {
+                document.getElementById('covidRatesResultMessage').innerHTML = 'Error adding data';
+            }
+        };
+        xhttp.open("POST", "/api/add_covid_rates_data", true);
+        xhttp.setRequestHeader("Content-Type", "application/json");
+        xhttp.send(JSON.stringify(data));
+    });
+
+    // AJAX for Updating Data
+    document.getElementById('covidRatesUpdateForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        var recordId = document.getElementById('recordId').value;
+        var data = {
+            city: document.getElementById('updateCity').value,
+            date: document.getElementById('updateDate').value,
+            casesPer100k: document.getElementById('updateCasesPer100k').value
+        };
+
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById('covidRatesUpdateResultMessage').innerHTML = 'Data updated successfully';
+            } else if (this.readyState == 4) {
+                document.getElementById('covidRatesUpdateResultMessage').innerHTML = 'Error updating data';
+            }
+        };
+        xhttp.open("PUT", "/api/update_covid_rates_data/" + recordId, true);
+        xhttp.setRequestHeader("Content-Type", "application/json");
+        xhttp.send(JSON.stringify(data));
+    });
+
+    // AJAX for Deleting Data
+    document.getElementById('deleteCovidRatesForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        var recordId = document.getElementById('deleteRecordId').value;
+
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById('covidRatesDeleteResultMessage').innerHTML = 'Data deleted successfully';
+            } else if (this.readyState == 4) {
+                document.getElementById('covidRatesDeleteResultMessage').innerHTML = 'Error deleting data';
+            }
+        };
+        xhttp.open("DELETE", "/api/delete_covid_rates_data/" + recordId, true);
+        xhttp.send();
+    });
+
+</script>
+
+</body>
+</html>

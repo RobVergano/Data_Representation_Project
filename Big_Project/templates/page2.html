@@ -1,0 +1,51 @@
+<!-- PAGE 2 -->
+<!-- This page provides the content for the covid statistics since 2020 -->
+<!DOCTYPE html>
+<html>
+    <style>
+        img {
+            display: block; /* Ensures each image takes its own line */
+            margin: auto;   /* Centers the image horizontally */
+            max-width: 100%; /* Makes sure the image is responsive and doesn't overflow the screen width */
+            height: auto; /* Keeps the aspect ratio of the image */
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .button:hover {
+            background-color: #45a049;
+        }
+    </style>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container mt-5">
+
+    <h1 style="text-align: center; margin-bottom: 1cm;"> Monthly evolution of Covid cases, deaths and vaccination </h1>
+
+    <h2> Covid cases since 2020 </h2>
+        <img src="\plots\covid_rates.png" alt="Covid rates">
+    
+    <h2> Deaths by COVID since 2020 </h2>
+        <img src="\plots\death_rates.png" alt="Death rates">
+
+    <h2> Vaccination rates since 2021 </h2>
+        <img src="\plots\vaccination_rates.png" alt="Vaccination rates">
+
+
+    <!-- Back menu button -->
+    <a href="/index" class="button">Back to Main Page</a>
+
+</div>
+</body>
+</html>

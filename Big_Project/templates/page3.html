@@ -1,0 +1,191 @@
+<!-- PAGE 3 -->
+<!-- This page provides the form to add/update/delete data from the vaccination_data table from the SQL database -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add/Delete Vaccination Data</title>
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        form {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2cm;
+        }
+
+        input[type="text"], input[type="number"], input[type="date"] {
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            width: calc(100% - 22px);
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .button:hover {
+            background-color: #45a049;
+        }
+
+        .form-title {
+            color: #333;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<h1 style="text-align: center;"> Add/Update/Delete Vaccination data </h1>
+
+<!-- Form for Adding Vaccination Data -->
+<div class="form-container">
+    <h2 class="form-title">Add Vaccination Data</h2>    
+    <form id="vaccinationDataForm">
+        <input type="text" id="city" name="city" placeholder="City" required>
+        <input type="text" id="area" name="area" placeholder="Area" required>
+        <input type="date" id="date" name="date" required>
+        <input type="number" id="vaccinationRate" name="vaccinationRate" placeholder="Vaccination Rate" required>
+        <button type="submit">Add Data</button>        
+    </form>
+    <div id="resultMessage"></div>
+</div>
+
+
+<!-- Form for Updating Vaccination Data -->
+<div class="form-container">
+    <h2 class="form-title">Update Vaccination Data</h2>    
+    <form id="updateVaccinationDataForm">
+        <input type="number" id="updateRecordId" name="updateRecordId" placeholder="Record ID" required>
+        <input type="text" id="updateCity" name="updateCity" placeholder="City" required>
+        <input type="text" id="updateArea" name="updateArea" placeholder="Area" required>
+        <input type="date" id="updateDate" name="updateDate" required>
+        <input type="number" id="updateVaccinationRate" name="updateVaccinationRate" placeholder="Vaccination Rate" required>
+        <button type="submit">Update Data</button>
+    </form>
+    <div id="updateResultMessage"></div>
+</div>
+
+<!-- Form for Deleting Vaccination Data -->
+<div class="form-container">
+    <h2 class="form-title">Delete Vaccination Data</h2>
+    <form id="deleteVaccinationDataForm">
+        <input type="number" id="recordId" name="recordId" placeholder="Record ID" required>
+        <button type="submit">Delete Record</button>
+    </form>
+    <div id="deleteResultMessage"></div>
+</div>
+
+<!-- Back to Main Page button -->
+<a href="/index" class="button">Back to Main Page</a>
+
+<script>
+    // AJAX for Adding Data
+    document.getElementById('vaccinationDataForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // This prevents the default form submission action
+        // object data with the values taken from the respective form inputs.
+        var data = {
+            city: document.getElementById('city').value,
+            area: document.getElementById('area').value,
+            date: document.getElementById('date').value,
+            vaccinationRate: document.getElementById('vaccinationRate').value
+        };
+        var xhttp = new XMLHttpRequest(); // Initializes a new AJAX request object.
+        xhttp.onreadystatechange = function() { //  Function to be executed when the readyState of the AJAX request changes
+            if (this.readyState == 4 && this.status == 200) { // Checks if the request is complete and successful 
+                document.getElementById('resultMessage').innerHTML = 'Data added successfully'; // If true, then updates the HTML content 
+            } else if (this.readyState == 4) {
+                document.getElementById('resultMessage').innerHTML = 'Error adding data';
+            }
+        };
+        xhttp.open("POST", "/api/add_vaccination_data", true); //AJAX request to use the POST method, targets the URL /api/add_vaccination_data
+        xhttp.setRequestHeader("Content-Type", "application/json"); // Sets the content type of the request to JSON
+        xhttp.send(JSON.stringify(data)); // Sends the AJAX request with the data object converted to a JSON string.
+    });
+
+    // AJAX for Deleting Data // Same as before but using a DELETE method
+    document.getElementById('deleteVaccinationDataForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        var recordId = document.getElementById('recordId').value;
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById('deleteResultMessage').innerHTML = 'Record deleted successfully';
+            } else if (this.readyState == 4) {
+                document.getElementById('deleteResultMessage').innerHTML = 'Error deleting record';
+            }
+        };
+        xhttp.open("DELETE", "/api/delete_vaccination_data/" + recordId, true);
+        xhttp.send();
+    });
+
+
+    // AJAX for Updating Data. Same as before but using a PUT method.
+    document.getElementById('updateVaccinationDataForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        var recordId = document.getElementById('updateRecordId').value;
+        var data = {
+            city: document.getElementById('updateCity').value,
+            area: document.getElementById('updateArea').value,
+            date: document.getElementById('updateDate').value,
+            vaccinationRate: document.getElementById('updateVaccinationRate').value
+        };
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById('updateResultMessage').innerHTML = 'Data updated successfully';
+            } else if (this.readyState == 4) {
+                document.getElementById('updateResultMessage').innerHTML = 'Error updating data';
+            }
+        };
+        xhttp.open("PUT", "/api/update_vaccination_data/" + recordId, true);
+        xhttp.setRequestHeader("Content-Type", "application/json");
+        xhttp.send(JSON.stringify(data));
+    });
+
+</script>
+
+</body>
+</html>
+
+
+
