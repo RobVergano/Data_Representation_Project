@@ -18,7 +18,7 @@ Download the repository with the folder "Big_Project". This folder contains a py
 1. Python.
 2. Please see requirements.txt in Big_Project folder for packages needed. 
 3. Activate MySQL server, Wampserver64 was used for this project. Username: root. No password needed.
-4. Activate python environment - **".\venv\Scripts\Activate.bat"**
+4. Activate python environment using the requirements provided - **".\venv\Scripts\Activate.bat"**
 5. Internet browser.
 
 ## How does the app work?
