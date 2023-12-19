@@ -3,17 +3,19 @@
 Course: Data Representation  
 Author: Roberto Vergano
 
-## Project A description
+## 1. Project A description
 
 The aim of this project was to create and consume RESTful APIs while using a Flask server, AJAX and a SQL database. 
 
 For the project, I wanted to study the COVID statistics in Dublin, Galway, Cork and Limerick. I created an app able to retrieve data from the cso website (1). Particularly, data from 3 different APIs: covid rates, death cases related to COVID, and vaccination rates. After formatting the json files, the data is uploaded to the “covid” SQL database (also created by the app). Through AJAX, the flask server is able to interact with the SQL database to perform CRUD operations.
 
-## Getting started
+For the CRUD operations, I have used the "XMLHttpRequest()" method (2) which I am more familiar with. Through the website, It is possible to add/update/delete records from the vaccination rates table and covid rates table in the SQL database. For more information on the html pages please see section 6.
+
+## 2. Getting started
 
 Download the repository with the folder "Big_Project". This folder contains a python environment with all the packages and programs to run the app.
 
-## Prerequisites
+## 3. Prerequisites
 
 1. Python.
 2. Please see requirements.txt in Big_Project folder for packages needed. 
@@ -21,7 +23,7 @@ Download the repository with the folder "Big_Project". This folder contains a py
 4. Activate python environment using the requirements provided - **".\venv\Scripts\Activate.bat"**
 5. Internet browser.
 
-## How does the app work?
+## 4. How does the app work?
 
 1. Open "Big_Project" folder in your python environment.
 
@@ -46,7 +48,7 @@ Download the repository with the folder "Big_Project". This folder contains a py
     - Username: data
     - Password: data
 
-## What other programs in Big_Project folder do?
+## 5. What other programs in Big_Project folder do?
 
 All the below programs are executed by **Myapp.py** in the following order:
 
@@ -57,7 +59,7 @@ All the below programs are executed by **Myapp.py** in the following order:
 5. **sql_dao.py:** This program retrieves the covid rates, death cases, and vaccination rates to create the plots for the page2.html
 6. **sql_queries.py:** This program stores SQL queries to be used in "sql_connector.py"
 
-## What do the other folders contain?
+## 6. What do the other folders contain?
 
 1. **Templates folder**: it contains all the html files for web display.
     - login.html: This page requests authorization before moving to index.html
@@ -71,5 +73,6 @@ All the below programs are executed by **Myapp.py** in the following order:
 
 3. **cso folder**: it contains all the json files saved by cso.py.
 
-## References
+## 7. References
 1. https://www.cso.ie/en/databases/  
+2. https://www.w3schools.com/xml/ajax_xmlhttprequest_create.asp  
